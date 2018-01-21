@@ -29,7 +29,7 @@ public class NNTrainerService {
 
         LOG.info("Training model " + config.getName());
         for (int i = 0; i < EPOCHS; ++i) {
-            LOG.info("Starting iteration №" + i);
+            LOG.info("Starting epoch №" + i);
             model.fit(trainDS);
         }
 
