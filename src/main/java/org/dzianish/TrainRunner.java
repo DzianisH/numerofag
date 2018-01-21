@@ -11,8 +11,8 @@ import java.io.IOException;
 import static org.dzianish.nmist.Constants.BATCH_SIZE;
 import static org.dzianish.nmist.Constants.RND_SEED;
 
-public class Runner {
-    private static final Logger LOG = LoggerFactory.getLogger(Runner.class);
+public class TrainRunner {
+    private static final Logger LOG = LoggerFactory.getLogger(TrainRunner.class);
 
     public static void main(String[] args) throws IOException {
         DataSetIterator mnistTrain = new MnistDataSetIterator(BATCH_SIZE, true, RND_SEED);

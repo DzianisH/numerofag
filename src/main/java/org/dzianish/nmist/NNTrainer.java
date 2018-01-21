@@ -39,7 +39,7 @@ public class NNTrainer {
         return nnModel;
     }
 
-    public void evaluateModel(NNModel nnModel, DataSetIterator ds) {
+    public double evaluateModel(NNModel nnModel, DataSetIterator ds) {
         LOG.info("Evaluating model " + nnModel.getName());
         MultiLayerNetwork model = nnModel.getModel();
         Evaluation eval = new Evaluation(CLASSES); //create an evaluation object with 10 possible classes
@@ -49,5 +49,6 @@ public class NNTrainer {
             eval.eval(next.getLabels(), output); //check the prediction against the true class
         }
         LOG.info(eval.stats());
+        return eval.f1();
     }
 }
