@@ -22,7 +22,7 @@ public class TrainRunner {
         NNConfig conf = new NNConfigFactory().createSingleLayerModel();
 
         LOG.info("Initializing model..");
-        NNModel model = new NNTrainer().fitModel(conf, mnistTrain, mnistTest);
+        NNModel model = new NNTrainerService().fitModel(conf, mnistTrain, mnistTest);
 
         LOG.info("Saving model..");
         new NNModelRepository().persist(model);

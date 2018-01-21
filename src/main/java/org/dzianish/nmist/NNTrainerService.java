@@ -9,12 +9,14 @@ import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import static org.dzianish.nmist.Constants.CLASSES;
 import static org.dzianish.nmist.Constants.EPOCHS;
 
-public class NNTrainer {
-    private static final Logger LOG = LoggerFactory.getLogger(NNTrainer.class);
+@Service
+public class NNTrainerService {
+    private static final Logger LOG = LoggerFactory.getLogger(NNTrainerService.class);
 
     public NNModel fitModel(NNConfig config, DataSetIterator trainDS, DataSetIterator testDS) {
         MultiLayerConfiguration configuration = config.getConfiguration();
@@ -39,7 +41,7 @@ public class NNTrainer {
         return nnModel;
     }
 
-    public double evaluateModel(NNModel nnModel, DataSetIterator ds) {
+    private double evaluateModel(NNModel nnModel, DataSetIterator ds) {
         LOG.info("Evaluating model " + nnModel.getName());
         MultiLayerNetwork model = nnModel.getModel();
         Evaluation eval = new Evaluation(CLASSES); //create an evaluation object with 10 possible classes

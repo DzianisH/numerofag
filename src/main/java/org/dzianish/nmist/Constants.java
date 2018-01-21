@@ -8,4 +8,7 @@ public interface Constants {
     int CLASSES = 10;
     int RND_SEED = 132;
     int BATCH_SIZE = 256;
+
+    String SINGLE_LAYER_MODEL = "single-layer-model";
+    String TWO_LAYER_MODEL = "two-layer-model";
 }

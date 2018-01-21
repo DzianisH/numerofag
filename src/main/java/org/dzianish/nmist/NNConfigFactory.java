@@ -14,7 +14,7 @@ import static org.nd4j.linalg.activations.Activation.SOFTMAX;
 public class NNConfigFactory {
     public NNConfig createSingleLayerModel() {
         return new NNConfig()
-                .withName("single-layer-model")
+                .withName(SINGLE_LAYER_MODEL)
                 .withConfiguration(new NeuralNetConfiguration.Builder()
                         .iterations(ITERATIONS)
                         .seed(RND_SEED)
@@ -41,7 +41,7 @@ public class NNConfigFactory {
 
     public NNConfig createTwoLayerModel() {
         return new NNConfig()
-                .withName("two-layer-model")
+                .withName(TWO_LAYER_MODEL)
                 .withConfiguration(new NeuralNetConfiguration.Builder()
                         .iterations(ITERATIONS)
                         .seed(RND_SEED)

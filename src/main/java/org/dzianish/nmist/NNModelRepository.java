@@ -4,10 +4,12 @@ import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.IOException;
 
+@Repository
 public class NNModelRepository {
     private static final Logger LOG = LoggerFactory.getLogger(NNConfigFactory.class);
 
