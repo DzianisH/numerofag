@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 @Repository
 public class NNModelRepository {
@@ -46,6 +50,18 @@ public class NNModelRepository {
         return new NNModel()
                 .withName(name)
                 .withModel(model);
+    }
+
+    public boolean isModelExists(String name) {
+        File model = new File(createPath(name));
+        return model.exists();
+    }
+
+    public List<String> getAvailableModelNames() {
+        File folder = new File(MODELS_REPO_PATH);
+        return Stream.of(folder.list())
+                .map(str -> str.substring(0, str.length() - MODEL_EXT.length()))
+                .collect(toList());
     }
 
     private String createPath(String name) {

@@ -1,22 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <script src="main.js"></script>
     <title>Numerofag</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 </head>
-<body onload="main.init(28, 28, 10, 15);">
-    <h1 id="answer">Draw Your Number</h1>
-    <div>
-        <div>
-            <canvas id="inputCanvas" width="280" height="280" style="border:1px solid #000000;"
-                    onmousemove="main.onMouseMove(event);">
-            </canvas>
-            <canvas id="previewCanvas" width="28" height="28" style="border:1px solid #000000;">
-            </canvas>
-        </div>
-        <button onclick="main.eval();">EVAL</button>
-        <button onclick="main.clear();">CLEAR</button>
-    </div>
+<body>
+    <a href="/"><h3>Mnist Demo Project</h3></a>
+    <h3>Please, select model</h3>
+    <ul th:each="model : ${models}">
+        <li><a th:href="@{'/demo/' + ${model}}" th:text="${model}">model</a></li>
+    </ul>
 </body>
 </html>

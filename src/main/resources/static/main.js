@@ -6,6 +6,7 @@ var main = {
     ctx: null,
     answer: null,
     previewCtx: null,
+    probabilities: null,
 
     init: function (sizeX, sizeY, scale, penSize) {
         main.answer = document.getElementById("answer");
@@ -16,6 +17,12 @@ var main = {
         main.scale = scale;
         if (!penSize) penSize = scale;
         main.penSize = penSize;
+
+        main.probabilities = new Array(10);
+        for (var i = 0; i < main.probabilities.length; ++i) {
+            main.probabilities[i] = document.getElementById("probability-for-" + i);
+
+        }
     },
 
     onMouseMove: function (event) {
@@ -45,28 +52,32 @@ var main = {
 
     sendRequest: function (data) {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/demo", true);
+        xhr.open("POST", "", true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onload = function (e) {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    console.log(xhr.responseText);
-                    main.answer.innerHTML = "You Wrote " + xhr.responseText;
+                    var response = JSON.parse(xhr.responseText);
+                    var estimate = Math.round(response.estimates[response.predictionClass] * 100);
+                    main.answer.innerHTML = "You Drew " + response.predictionClass + " (" + estimate + "% sure)";
+
+                    for(var i = 0; i < response.estimates.length; ++i){
+                        main.probabilities[i].innerHTML = response.estimates[i].toFixed(3);
+                    }
+
                 } else {
-                    console.error(xhr.statusText);
+                    console.error(xhr);
+                    main.answer.innerHTML = "Unexpected Error Occurred";
                 }
             }
         };
         xhr.onerror = function (e) {
-            console.error(xhr.statusText);
+            console.error(xhr);
+            main.answer.innerHTML = "Unexpected Error Occurred";
         };
 
-        var sentData = {
-            model: "single-layer-model",
-            features: data
-        };
         main.answer.innerHTML = "Executing...";
-        xhr.send(JSON.stringify(sentData));
+        xhr.send(JSON.stringify(data));
     },
 
     updatePreview: function (features) {

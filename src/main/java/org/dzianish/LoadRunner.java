@@ -18,16 +18,16 @@ public class LoadRunner {
 
         LOG.info("Evaluating model..");
 
-        int prediction = new NNExecutorService().getPrediction(model, toINDArray(EIGHT));
+        int prediction = new NNExecutorService().getPredictionClass(model, toINDArray(EIGHT));
         LOG.info(prediction + " should be EIGHT");
 
-        prediction = new NNExecutorService().getPrediction(model, toINDArray(NINE));
+        prediction = new NNExecutorService().getPredictionClass(model, toINDArray(NINE));
         LOG.info(prediction + " should be NINE");
 
-        prediction = new NNExecutorService().getPrediction(model, toINDArray(THREE));
+        prediction = new NNExecutorService().getPredictionClass(model, toINDArray(THREE));
         LOG.info(prediction + " should be THREE");
 
-        prediction = new NNExecutorService().getPrediction(model, toINDArray(ONE));
+        prediction = new NNExecutorService().getPredictionClass(model, toINDArray(ONE));
         LOG.info(prediction + " should be ONE");
     }
 

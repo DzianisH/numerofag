@@ -9,12 +9,11 @@ import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import static org.dzianish.nmist.Constants.CLASSES;
 import static org.dzianish.nmist.Constants.EPOCHS;
 
-@Service
+//@Service
 public class NNTrainerService {
     private static final Logger LOG = LoggerFactory.getLogger(NNTrainerService.class);
 
@@ -22,6 +21,8 @@ public class NNTrainerService {
         MultiLayerConfiguration configuration = config.getConfiguration();
         MultiLayerNetwork model = new MultiLayerNetwork(configuration);
         model.init();
+
+        LOG.info("Number of parameters: " + model.numParams());
 
         //print the score with every 10 iteration
         model.setListeners(new ScoreIterationListener(10));

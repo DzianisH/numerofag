@@ -19,7 +19,7 @@ public class TrainRunner {
         DataSetIterator mnistTest = new MnistDataSetIterator(BATCH_SIZE, false, RND_SEED);
 
         LOG.info("Building model..");
-        NNConfig conf = new NNConfigFactory().createSingleLayerModel();
+        NNConfig conf = new NNConfigFactory().createSingleLayerConfig();
 
         LOG.info("Initializing model..");
         NNModel model = new NNTrainerService().fitModel(conf, mnistTrain, mnistTest);
