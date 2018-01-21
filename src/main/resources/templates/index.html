@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
+    <script src="main.js"></script>
     <title>Numerofag</title>
 </head>
-<body>
-    <h1>Hello World</h1>
+<body onload="main.init(28, 28, 10, 6);">
+    <h1>Draw Your Number</h1>
+    <div>
+        <div>
+            <canvas id="myCanvas" width="280" height="280" style="border:1px solid #000000;"
+                    onmousemove="main.onMouseMove(event);">
+            </canvas>
+        </div>
+        <button onclick="main.eval();">EVAL</button>
+        <button onclick="main.clear();">CLEAR</button>
+    </div>
 </body>
 </html>
