@@ -8,14 +8,15 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+import static org.dzianish.nmist.Constants.BATCH_SIZE;
+import static org.dzianish.nmist.Constants.RND_SEED;
+
 public class Runner {
     private static final Logger LOG = LoggerFactory.getLogger(Runner.class);
-    
-    public static void main(String[] args) throws IOException {
-        int batchSize = 256, seed = 132;
 
-        DataSetIterator mnistTrain = new MnistDataSetIterator(batchSize, true, seed);
-        DataSetIterator mnistTest = new MnistDataSetIterator(batchSize, false, seed);
+    public static void main(String[] args) throws IOException {
+        DataSetIterator mnistTrain = new MnistDataSetIterator(BATCH_SIZE, true, RND_SEED);
+        DataSetIterator mnistTest = new MnistDataSetIterator(BATCH_SIZE, false, RND_SEED);
 
         LOG.info("Building model..");
         NNConfig conf = new NNConfigFactory().createSingleLayerModel();

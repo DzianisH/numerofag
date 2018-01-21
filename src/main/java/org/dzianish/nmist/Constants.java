@@ -7,4 +7,5 @@ public interface Constants {
     int INPUT_COLS = 28;
     int CLASSES = 10;
     int RND_SEED = 132;
+    int BATCH_SIZE = 256;
 }
