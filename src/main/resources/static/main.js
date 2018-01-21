@@ -2,15 +2,19 @@ var main = {
     scale: null,
     penSize: null,
     canvSize: null,
-    canvas: null,
+    previewSize: null,
     ctx: null,
+    answer: null,
+    previewCtx: null,
 
     init: function (sizeX, sizeY, scale, penSize) {
-        main.canvas = document.getElementById("myCanvas");
-        main.ctx = main.canvas.getContext("2d");
+        main.answer = document.getElementById("answer");
+        main.previewCtx = document.getElementById("previewCanvas").getContext("2d");
+        main.ctx = document.getElementById("inputCanvas").getContext("2d");
         main.canvSize = {x: sizeX * scale, y: sizeY * scale};
+        main.previewSize = {x: sizeX, y: sizeY};
         main.scale = scale;
-        if(!penSize) penSize = scale;
+        if (!penSize) penSize = scale;
         main.penSize = penSize;
     },
 
@@ -34,7 +38,47 @@ var main = {
 
     eval: function () {
         var data = main.extractColorsArray();
-        main.reshapeAndScale(data);
+        data = main.reshapeAndScale(data);
+        main.updatePreview(data);
+        this.sendRequest(data);
+    },
+
+    sendRequest: function (data) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/demo", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onload = function (e) {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    main.answer.innerHTML = "You Wrote " + xhr.responseText;
+                } else {
+                    console.error(xhr.statusText);
+                }
+            }
+        };
+        xhr.onerror = function (e) {
+            console.error(xhr.statusText);
+        };
+
+        var sentData = {
+            model: "single-layer-model",
+            features: data
+        };
+        main.answer.innerHTML = "Executing...";
+        xhr.send(JSON.stringify(sentData));
+    },
+
+    updatePreview: function (features) {
+        var imgData = main.previewCtx.createImageData(main.previewSize.x, main.previewSize.y);
+        for (var i = 0; i < features.length; ++i) {
+            for (var j = 0; j < features[i].length; ++j) {
+                var index = (i * features[i].length + j) * 4 + 3;
+                imgData.data[index] = Math.floor(features[i][j] * 255);
+            }
+        }
+
+        main.previewCtx.putImageData(imgData, 0, 0);
 
     },
 
@@ -58,16 +102,16 @@ var main = {
                 var resJ = Math.floor(j / main.scale);
 
                 result[resI][resJ] += data[index] / crlCoef;
-
             }
         }
         main.printFeatures(result);
+        return result;
     },
 
     printFeatures: function (features) {
         var str = "";
-        for(var i = 0; i < features.length; ++i){
-            for(var j = 0; j < features[i].length; ++j){
+        for (var i = 0; i < features.length; ++i) {
+            for (var j = 0; j < features[i].length; ++j) {
                 str += features[i][j].toFixed(2) + " ";
             }
             str += "\n";

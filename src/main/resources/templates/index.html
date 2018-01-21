@@ -5,12 +5,14 @@
     <script src="main.js"></script>
     <title>Numerofag</title>
 </head>
-<body onload="main.init(28, 28, 10, 6);">
-    <h1>Draw Your Number</h1>
+<body onload="main.init(28, 28, 10, 15);">
+    <h1 id="answer">Draw Your Number</h1>
     <div>
         <div>
-            <canvas id="myCanvas" width="280" height="280" style="border:1px solid #000000;"
+            <canvas id="inputCanvas" width="280" height="280" style="border:1px solid #000000;"
                     onmousemove="main.onMouseMove(event);">
+            </canvas>
+            <canvas id="previewCanvas" width="28" height="28" style="border:1px solid #000000;">
             </canvas>
         </div>
         <button onclick="main.eval();">EVAL</button>
