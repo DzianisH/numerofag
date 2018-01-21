@@ -2,7 +2,6 @@ var main = {
     scale: null,
     penSize: null,
     canvSize: null,
-    previewSize: null,
     ctx: null,
     answer: null,
     previewCtx: null,
@@ -13,7 +12,6 @@ var main = {
         main.previewCtx = document.getElementById("previewCanvas").getContext("2d");
         main.ctx = document.getElementById("inputCanvas").getContext("2d");
         main.canvSize = {x: sizeX * scale, y: sizeY * scale};
-        main.previewSize = {x: sizeX, y: sizeY};
         main.scale = scale;
         if (!penSize) penSize = scale;
         main.penSize = penSize;
@@ -36,7 +34,8 @@ var main = {
     },
 
     onMouseDrag: function (position) {
-        main.ctx.fillRect(position.x, position.y, main.penSize, main.penSize);
+        var offset = main.penSize / 2;
+        main.ctx.fillRect(position.x - offset, position.y - offset, main.penSize, main.penSize);
     },
 
     clear: function () {
@@ -61,7 +60,7 @@ var main = {
                     var estimate = Math.round(response.estimates[response.predictionClass] * 100);
                     main.answer.innerHTML = "You Drew " + response.predictionClass + " (" + estimate + "% sure)";
 
-                    for(var i = 0; i < response.estimates.length; ++i){
+                    for (var i = 0; i < response.estimates.length; ++i) {
                         main.probabilities[i].innerHTML = response.estimates[i].toFixed(3);
                     }
 
@@ -81,11 +80,17 @@ var main = {
     },
 
     updatePreview: function (features) {
-        var imgData = main.previewCtx.createImageData(main.previewSize.x, main.previewSize.y);
+        var imgData = main.previewCtx.createImageData(main.canvSize.x, main.canvSize.y);
         for (var i = 0; i < features.length; ++i) {
             for (var j = 0; j < features[i].length; ++j) {
-                var index = (i * features[i].length + j) * 4 + 3;
-                imgData.data[index] = Math.floor(features[i][j] * 255);
+                for (var k = 0; k < main.scale; ++k) {
+                    for (var w = 0; w < main.scale; ++w) {
+                        var x = (i * main.scale + k) * main.scale;
+                        var y = j * main.scale + w;
+                        var index = (x * features[i].length + y) * 4 + 3;
+                        imgData.data[index] = Math.floor(features[i][j] * 255);
+                    }
+                }
             }
         }
 

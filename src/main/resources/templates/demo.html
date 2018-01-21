@@ -11,19 +11,27 @@
 <body onload="main.init(28, 28, 10, 15);">
     <div>
         <a href="/"><h3>Mnist Demo Project</h3></a>
-        <div style="display: flex; justify-content: space-between   ">
+        <div style="display: flex; justify-content: space-between">
             <div>
-                <h3 id="answer" align="center">Draw Your Digit</h3>
-                <canvas id="inputCanvas" width="280" height="280" style="border:1px solid #000000;"
-                        onmousemove="main.onMouseMove(event);">
-                </canvas>
-                <canvas id="previewCanvas" width="28" height="28" style="border:1px solid #000000;">
-                </canvas>
-                <br/>
-                <button onclick="main.eval();">EVAL</button>
-                <button onclick="main.clear();">CLEAR</button>
+                <div style="display: flex; justify-content: space-between">
+                    <div style="margin: 0 2em;">
+                        <h3 id="answer" align="center">Draw Your Digit</h3>
+                        <canvas id="inputCanvas" width="280" height="280" style="border:1px solid #000000;"
+                                onmousemove="main.onMouseMove(event);">
+                        </canvas>
+                    </div>
+                    <div style="margin: 0 2em;">
+                        <h3 align="center">Scaled Picture</h3>
+                        <canvas id="previewCanvas" width="280" height="280" style="border:1px solid #000000;">
+                        </canvas>
+                    </div>
+                </div>
+                <div style="margin: 0 2em;">
+                    <button onclick="main.eval();">EVAL</button>
+                    <button onclick="main.clear();">CLEAR</button>
+                </div>
             </div>
-            <div>
+            <div style="margin: 0 2em">
                 <h3 th:text="${modelName}">model name</h3>
                 <table style="margin: 1em; padding: 1em;">
                     <caption><h3>Probabilities</h3></caption>
