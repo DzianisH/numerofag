@@ -1,7 +1,9 @@
-package org.dzianish.nmist;
+package org.dzianish.repositories;
 
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;
+import org.dzianish.services.NNConfigFactory;
+import org.dzianish.domain.NNModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;

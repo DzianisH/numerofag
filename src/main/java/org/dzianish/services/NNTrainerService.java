@@ -1,17 +1,19 @@
-package org.dzianish.nmist;
+package org.dzianish.services;
 
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
+import org.dzianish.domain.NNConfig;
+import org.dzianish.domain.NNModel;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.dzianish.nmist.Constants.CLASSES;
-import static org.dzianish.nmist.Constants.EPOCHS;
+import static org.dzianish.consts.Constants.CLASSES;
+import static org.dzianish.consts.Constants.EPOCHS;
 
 //@Service
 public class NNTrainerService {

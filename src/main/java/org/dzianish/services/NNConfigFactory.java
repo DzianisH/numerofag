@@ -1,4 +1,4 @@
-package org.dzianish.nmist;
+package org.dzianish.services;
 
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
 import org.deeplearning4j.nn.conf.inputs.InputType;
@@ -7,13 +7,13 @@ import org.deeplearning4j.nn.conf.layers.DenseLayer;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.conf.layers.SubsamplingLayer;
 import org.deeplearning4j.nn.conf.preprocessor.FeedForwardToCnnPreProcessor;
+import org.dzianish.domain.NNConfig;
 import org.nd4j.linalg.learning.config.Nesterovs;
-import org.nd4j.linalg.lossfunctions.LossFunctions;
 
 import static org.deeplearning4j.nn.api.OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT;
 import static org.deeplearning4j.nn.conf.layers.SubsamplingLayer.PoolingType.MAX;
 import static org.deeplearning4j.nn.weights.WeightInit.XAVIER;
-import static org.dzianish.nmist.Constants.*;
+import static org.dzianish.consts.Constants.*;
 import static org.nd4j.linalg.activations.Activation.RELU;
 import static org.nd4j.linalg.activations.Activation.SOFTMAX;
 import static org.nd4j.linalg.lossfunctions.LossFunctions.LossFunction.MCXENT;

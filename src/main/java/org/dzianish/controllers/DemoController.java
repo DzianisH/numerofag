@@ -1,9 +1,9 @@
-package org.dzianish.application;
+package org.dzianish.controllers;
 
-import org.dzianish.nmist.NNExecutorService;
-import org.dzianish.nmist.NNModel;
-import org.dzianish.nmist.NNModelRepository;
-import org.dzianish.nmist.NNPredictions;
+import org.dzianish.services.NNExecutorService;
+import org.dzianish.domain.NNModel;
+import org.dzianish.repositories.NNModelRepository;
+import org.dzianish.domain.NNPredictions;
 import org.dzianish.utils.Utils;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.slf4j.Logger;
@@ -12,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.io.IOException;
 
 import static org.dzianish.utils.Utils.toINDArray;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -35,7 +33,7 @@ public class DemoController {
     }
 
     @GetMapping("/demo/{modelName}")
-    public ModelAndView getDemoPage(@PathVariable String modelName, ModelMap model) throws IOException {
+    public ModelAndView getDemoPage(@PathVariable String modelName, ModelMap model) {
         if (repository.isModelExists(modelName)) {
             model.put("modelName", modelName);
             return new ModelAndView("demo", model);

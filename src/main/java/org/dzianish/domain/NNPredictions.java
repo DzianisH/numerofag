@@ -1,4 +1,4 @@
-package org.dzianish.nmist;
+package org.dzianish.domain;
 
 public class NNPredictions {
     private double[] estimates;

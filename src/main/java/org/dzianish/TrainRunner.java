@@ -1,15 +1,18 @@
 package org.dzianish;
 
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
-import org.dzianish.nmist.*;
+import org.dzianish.domain.NNConfig;
+import org.dzianish.domain.NNModel;
+import org.dzianish.services.*;
+import org.dzianish.repositories.NNModelRepository;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-import static org.dzianish.nmist.Constants.BATCH_SIZE;
-import static org.dzianish.nmist.Constants.RND_SEED;
+import static org.dzianish.consts.Constants.BATCH_SIZE;
+import static org.dzianish.consts.Constants.RND_SEED;
 
 public class TrainRunner {
     private static final Logger LOG = LoggerFactory.getLogger(TrainRunner.class);
