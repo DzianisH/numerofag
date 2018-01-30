@@ -19,7 +19,6 @@ var main = {
         main.probabilities = new Array(10);
         for (var i = 0; i < main.probabilities.length; ++i) {
             main.probabilities[i] = document.getElementById("probability-for-" + i);
-
         }
     },
 
@@ -57,11 +56,18 @@ var main = {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     var response = JSON.parse(xhr.responseText);
-                    var estimate = Math.round(response.estimates[response.predictionClass] * 100);
+                    var predictionEstimate = response.estimates[response.predictionClass];
+                    var estimate = Math.round(predictionEstimate * 100);
                     main.answer.innerHTML = "You Drew " + response.predictionClass + " (" + estimate + "% sure)";
 
                     for (var i = 0; i < response.estimates.length; ++i) {
-                        main.probabilities[i].innerHTML = response.estimates[i].toFixed(3);
+                        estimate = response.estimates[i];
+                        main.probabilities[i].innerHTML = estimate.toFixed(3);
+
+                        var classes = "";
+                        if(i === response.predictionClass) classes = "predicted-value ";
+                        if(estimate / predictionEstimate >= 0.5) classes += "prediction-noise";
+                        main.probabilities[i].parentNode.parentNode.setAttribute("class", classes);
                     }
 
                 } else {

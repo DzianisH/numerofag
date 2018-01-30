@@ -2,11 +2,10 @@ package org.dzianish.services;
 
 import org.deeplearning4j.earlystopping.EarlyStoppingConfiguration;
 import org.deeplearning4j.earlystopping.EarlyStoppingResult;
-import org.deeplearning4j.earlystopping.listener.EarlyStoppingListener;
 import org.deeplearning4j.earlystopping.saver.LocalFileModelSaver;
-import org.deeplearning4j.earlystopping.scorecalc.DataSetLossCalculator;
 import org.deeplearning4j.earlystopping.termination.InvalidScoreIterationTerminationCondition;
 import org.deeplearning4j.earlystopping.termination.MaxEpochsTerminationCondition;
+import org.deeplearning4j.earlystopping.termination.ScoreImprovementEpochTerminationCondition;
 import org.deeplearning4j.earlystopping.trainer.EarlyStoppingTrainer;
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
@@ -19,8 +18,7 @@ import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.dzianish.consts.Constants.CLASSES;
-import static org.dzianish.consts.Constants.MAX_EPOCHS;
+import static org.dzianish.consts.Constants.*;
 
 //@Service
 public class NNTrainerService {
@@ -29,26 +27,27 @@ public class NNTrainerService {
     public NNModel fitModel(NNConfig config, DataSetIterator trainDS, DataSetIterator testDS) {
 
         EarlyStoppingConfiguration<MultiLayerNetwork> esConf = new EarlyStoppingConfiguration.Builder<MultiLayerNetwork>()
-                .epochTerminationConditions(new MaxEpochsTerminationCondition(MAX_EPOCHS))
+                .epochTerminationConditions(
+                        new MaxEpochsTerminationCondition(MAX_EPOCHS),
+                        new ScoreImprovementEpochTerminationCondition(MAX_EPOCHS_WO_IMPROVEMENT))
                 .iterationTerminationConditions(new InvalidScoreIterationTerminationCondition())
                 .saveLastModel(true)
                 .scoreCalculator(new GenericCalculator(testDS, Evaluation::accuracy))
                 .evaluateEveryNEpochs(1)
-                .modelSaver(new LocalFileModelSaver("dir-to-save-models"))
+                .modelSaver(new LocalFileModelSaver("models/" + config.getName()))
                 .build();
 
         EarlyStoppingTrainer trainer = new EarlyStoppingTrainer(esConf,
                 new MultiLayerNetwork(config.getConfiguration()), trainDS);
 
+        LOG.info("Training model: " + config.getName());
+
         EarlyStoppingResult<MultiLayerNetwork> result = trainer.fit();
 
         LOG.info("Termination reason: " + result.getTerminationReason());
-        LOG.info("Termination details: " + result.getTerminationDetails());
         LOG.info("Total epochs: " + result.getTotalEpochs());
         LOG.info("Best epoch number: " + result.getBestModelEpoch());
         LOG.info("Score at best epoch: " + result.getBestModelScore());
-
-        result.getBestModel();
 
         NNModel nnModel = new NNModel()
                 .withName(config.getName())

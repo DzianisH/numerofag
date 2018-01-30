@@ -2,84 +2,90 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <script src="/main.js"></script>
     <title>Numerofag</title>
+    <link rel="stylesheet" href="/main.css"/>
+    <script src="/main.js"></script>
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 </head>
 <body onload="main.init(28, 28, 10, 15);">
-    <div>
-        <a href="/"><h3>Mnist Demo Project</h3></a>
-        <div style="display: flex; justify-content: space-between">
-            <div>
-                <div style="display: flex; justify-content: space-between">
-                    <div style="margin: 0 2em;">
-                        <h3 id="answer" align="center">Draw Your Digit</h3>
-                        <canvas id="inputCanvas" width="280" height="280" style="border:1px solid #000000;"
-                                onmousemove="main.onMouseMove(event);">
-                        </canvas>
-                    </div>
-                    <div style="margin: 0 2em;">
-                        <h3 align="center">Scaled Picture</h3>
-                        <canvas id="previewCanvas" width="280" height="280" style="border:1px solid #000000;">
-                        </canvas>
-                    </div>
-                </div>
-                <div style="margin: 0 2em;">
-                    <button onclick="main.eval();">EVAL</button>
-                    <button onclick="main.clear();">CLEAR</button>
-                </div>
+<a href="/">
+    <div class="logo">
+        <h3>Mnist Demo Project</h3>
+    </div>
+</a>
+<div class="content-holder">
+    <div class="demo-box-bar-wrapper">
+        <div class="demo-box-bar">
+            <div class="demo-box">
+                <h3 align="center">Draw Your Digit</h3>
+                <canvas id="inputCanvas" width="280" height="280" onmousemove="main.onMouseMove(event);">
+                </canvas>
             </div>
-            <div style="margin: 0 2em">
+            <div class="demo-box">
+                <h3 align="center">Scaled Picture</h3>
+                <canvas id="previewCanvas" width="280" height="280">
+                </canvas>
+            </div>
+            <div class="demo-box">
                 <h3 th:text="${modelName}">model name</h3>
-                <table style="margin: 1em; padding: 1em;">
-                    <caption><h3>Probabilities</h3></caption>
+                <table class="predictions-table">
+                    <caption>Probabilities</caption>
                     <tbody>
-                        <tr>
-                            <td>ZERO: </td>
-                            <td><b id="probability-for-0">0.000</b></td>
-                        </tr>
-                        <tr>
-                            <td>ONE: </td>
-                            <td><b id="probability-for-1">0.000</b></td>
-                        </tr>
-                        <tr>
-                            <td>TWO: </td>
-                            <td><b id="probability-for-2">0.000</b></td>
-                        </tr>
-                        <tr>
-                            <td>THREE: </td>
-                            <td><b id="probability-for-3">0.000</b></td>
-                        </tr>
-                        <tr>
-                            <td>FOUR: </td>
-                            <td><b id="probability-for-4">0.000</b></td>
-                        </tr>
-                        <tr>
-                            <td>FIVE: </td>
-                            <td><b id="probability-for-5">0.000</b></td>
-                        </tr>
-                        <tr>
-                            <td>SIX: </td>
-                            <td><b id="probability-for-6">0.000</b></td>
-                        </tr>
-                        <tr>
-                            <td>SEVEN: </td>
-                            <td><b id="probability-for-7">0.000</b></td>
-                        </tr>
-                        <tr>
-                            <td>EIGHT: </td>
-                            <td><b id="probability-for-8">0.000</b></td>
-                        </tr>
-                        <tr>
-                            <td>NINE: </td>
-                            <td><b id="probability-for-9">0.000</b></td>
-                        </tr>
+                    <tr>
+                        <td>ZERO:</td>
+                        <td><b id="probability-for-0">0.000</b></td>
+                    </tr>
+                    <tr>
+                        <td>ONE:</td>
+                        <td><b id="probability-for-1">0.000</b></td>
+                    </tr>
+                    <tr>
+                        <td>TWO:</td>
+                        <td><b id="probability-for-2">0.000</b></td>
+                    </tr>
+                    <tr>
+                        <td>THREE:</td>
+                        <td><b id="probability-for-3">0.000</b></td>
+                    </tr>
+                    <tr>
+                        <td>FOUR:</td>
+                        <td><b id="probability-for-4">0.000</b></td>
+                    </tr>
+                    <tr>
+                        <td>FIVE:</td>
+                        <td><b id="probability-for-5">0.000</b></td>
+                    </tr>
+                    <tr>
+                        <td>SIX:</td>
+                        <td><b id="probability-for-6">0.000</b></td>
+                    </tr>
+                    <tr>
+                        <td>SEVEN:</td>
+                        <td><b id="probability-for-7">0.000</b></td>
+                    </tr>
+                    <tr>
+                        <td>EIGHT:</td>
+                        <td><b id="probability-for-8">0.000</b></td>
+                    </tr>
+                    <tr>
+                        <td>NINE:</td>
+                        <td><b id="probability-for-9">0.000</b></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <div class="demo-box">
+        <button onclick="main.eval();">EVAL</button>
+        <button onclick="main.clear();">CLEAR</button>
+    </div>
+    <h2>
+        <span>Prediction:</span>
+        <span id="answer"></span>
+    </h2>
+</div>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class DemoController {
     private NNModelRepository repository;
 
 
-    @GetMapping("/")
+    @GetMapping({"/", "/demo"})
     public ModelAndView getIndexPage(ModelMap model) {
         model.put("models", repository.getAvailableModelNames());
         return new ModelAndView("index", model);

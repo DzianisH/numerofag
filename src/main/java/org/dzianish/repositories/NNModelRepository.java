@@ -20,7 +20,7 @@ public class NNModelRepository {
     private static final Logger LOG = LoggerFactory.getLogger(NNConfigFactory.class);
 
     private static final String MODELS_REPO_PATH = "models/";
-    private static final String MODEL_EXT = ".nn";
+    private static final String MODEL_EXT = "/bestModel.bin";
 
     public NNModelRepository() {
         boolean isOK = new File(MODELS_REPO_PATH).mkdirs();
@@ -62,7 +62,7 @@ public class NNModelRepository {
     public List<String> getAvailableModelNames() {
         File folder = new File(MODELS_REPO_PATH);
         return Stream.of(folder.list())
-                .map(str -> str.substring(0, str.length() - MODEL_EXT.length()))
+                .filter(str -> new File(folder.getAbsolutePath(), str + MODEL_EXT).exists())
                 .collect(toList());
     }
 

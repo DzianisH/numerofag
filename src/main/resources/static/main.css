@@ -1,0 +1,64 @@
+html body {
+    background: #fefdfd;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    text-align: center;
+    background: #cbf3ff;
+    text-decoration: crimson;
+}
+
+.content-holder {
+    margin: 1em;
+}
+
+.demo-box-bar-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.demo-box-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.demo-box {
+    margin: 0 2em;
+}
+
+.demo-box > canvas {
+    border: 1px solid #000000;
+    background: #fcfcfe;
+}
+
+.predictions-table {
+    margin: 0 1em;
+    font-size: 1.3em;
+}
+
+.predictions-table > caption {
+    margin: 0;
+    padding: 0 0 0.3em;
+    font-size: 1.3em;
+}
+
+.predictions-table tr {
+    padding: 0.5em 0;
+}
+
+.predictions-table td {
+    padding: 0 0.2em;
+}
+
+.predicted-value {
+    background: #00f000 !important;
+    color: #000000;
+    font-style: italic;
+}
+
+.prediction-noise {
+    background: #ddf5e5;
+
+}
