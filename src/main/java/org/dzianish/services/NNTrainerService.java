@@ -40,7 +40,7 @@ public class NNTrainerService {
 
         EarlyStoppingConfiguration<MultiLayerNetwork> esConf = new EarlyStoppingConfiguration.Builder<MultiLayerNetwork>()
                 .epochTerminationConditions(
-                        new MaxEpochsTerminationCondition(MAX_EPOCHS),
+//                        new MaxEpochsTerminationCondition(MAX_EPOCHS),
                         new ScoreImprovementEpochTerminationCondition(MAX_EPOCHS_WO_IMPROVEMENT))
                 .iterationTerminationConditions(new InvalidScoreIterationTerminationCondition())
                 .saveLastModel(true)

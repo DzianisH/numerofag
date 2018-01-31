@@ -1,12 +1,11 @@
 package org.dzianish;
 
-import org.dzianish.services.NNExecutorService;
 import org.dzianish.domain.NNModel;
 import org.dzianish.repositories.NNModelRepository;
+import org.dzianish.services.NNExecutorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.dzianish.consts.Constants.TWO_LAYER_MODEL;
 import static org.dzianish.utils.Utils.toINDArray;
 
 public class LoadRunner {
@@ -14,7 +13,7 @@ public class LoadRunner {
 
     public static void main(String[] args) {
         LOG.info("Loading model..");
-        NNModel model = new NNModelRepository().load(TWO_LAYER_MODEL);
+        NNModel model = new NNModelRepository().load("D-O");
 
         LOG.info("Evaluating model..");
 
