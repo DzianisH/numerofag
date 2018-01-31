@@ -1,6 +1,4 @@
-package org.dzianish;
-
-import static org.dzianish.consts.Constants.CLASSES;
+package org.dzianish.dl4j;
 
 import org.deeplearning4j.earlystopping.scorecalc.ScoreCalculator;
 import org.deeplearning4j.eval.Evaluation;
@@ -12,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.function.ToDoubleFunction;
+
+import static org.dzianish.consts.Constants.CLASSES;
 
 public class GenericCalculator implements ScoreCalculator<MultiLayerNetwork> {
 	private static final Logger LOG = LoggerFactory.getLogger(GenericCalculator.class);

@@ -2,14 +2,14 @@ package org.dzianish.services;
 
 import org.deeplearning4j.earlystopping.EarlyStoppingConfiguration;
 import org.deeplearning4j.earlystopping.EarlyStoppingResult;
-import org.deeplearning4j.earlystopping.saver.LocalFileModelSaver;
 import org.deeplearning4j.earlystopping.termination.InvalidScoreIterationTerminationCondition;
 import org.deeplearning4j.earlystopping.termination.MaxEpochsTerminationCondition;
 import org.deeplearning4j.earlystopping.termination.ScoreImprovementEpochTerminationCondition;
 import org.deeplearning4j.earlystopping.trainer.EarlyStoppingTrainer;
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
-import org.dzianish.GenericCalculator;
+import org.dzianish.dl4j.GenericCalculator;
+import org.dzianish.dl4j.LocalFileModelFullInfoSaver;
 import org.dzianish.domain.NNConfig;
 import org.dzianish.domain.NNModel;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -46,7 +46,7 @@ public class NNTrainerService {
                 .saveLastModel(true)
                 .scoreCalculator(new GenericCalculator(testDS, Evaluation::accuracy))
                 .evaluateEveryNEpochs(1)
-                .modelSaver(new LocalFileModelSaver("models/" + model.getName()))
+                .modelSaver(new LocalFileModelFullInfoSaver("models/" + model.getName()))
                 .build();
 
         EarlyStoppingTrainer trainer = new EarlyStoppingTrainer(esConf,
