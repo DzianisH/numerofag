@@ -25,15 +25,18 @@ public class NNTrainerService {
     private static final Logger LOG = LoggerFactory.getLogger(NNTrainerService.class);
 
     public NNModel fitModel(NNConfig config, DataSetIterator trainDS, DataSetIterator testDS) {
+        MultiLayerNetwork configuration = new MultiLayerNetwork(config.getConfiguration());
         NNModel model = new NNModel()
                 .withName(config.getName())
-                .withModel(new MultiLayerNetwork(config.getConfiguration()));
+                .withModel(configuration);
 
         return fitModel(model, trainDS, testDS);
     }
 
 
     public NNModel fitModel(NNModel model, DataSetIterator trainDS, DataSetIterator testDS) {
+        LOG.info("Initializing model " + model.getName());
+        model.getModel().init();
 
         EarlyStoppingConfiguration<MultiLayerNetwork> esConf = new EarlyStoppingConfiguration.Builder<MultiLayerNetwork>()
                 .epochTerminationConditions(
@@ -49,8 +52,7 @@ public class NNTrainerService {
         EarlyStoppingTrainer trainer = new EarlyStoppingTrainer(esConf,
                 model.getModel(), trainDS);
 
-        LOG.info("Training model: " + model.getName());
-
+        LOG.info("Training model: " + model.getName() +  " with " + model.getModel().numParams() + " params");
         EarlyStoppingResult<MultiLayerNetwork> result = trainer.fit();
 
         LOG.info("Termination reason: " + result.getTerminationReason());
@@ -58,13 +60,10 @@ public class NNTrainerService {
         LOG.info("Best epoch number: " + result.getBestModelEpoch());
         LOG.info("Score at best epoch: " + result.getBestModelScore());
 
-        NNModel nnModel = new NNModel()
-                .withName(model.getName())
-                .withModel(result.getBestModel());
+		model.setModel(result.getBestModel());
+        evaluateModel(model, testDS);
 
-        evaluateModel(nnModel, testDS);
-
-        return nnModel;
+        return model;
     }
 
     private void evaluateModel(NNModel nnModel, DataSetIterator ds) {

@@ -19,17 +19,18 @@ import static org.nd4j.linalg.activations.Activation.SOFTMAX;
 import static org.nd4j.linalg.lossfunctions.LossFunctions.LossFunction.MCXENT;
 
 public class NNConfigFactory {
-    // 39760 params 50890
-    public NNConfig createSingleLayerConfig() {
+
+    public NNConfig createTwoLayerConfig() {
         return new NNConfig()
-                .withName(SINGLE_LAYER_MODEL)
+                .withName(TWO_LAYER_MODEL)
                 .withConfiguration(new NeuralNetConfiguration.Builder()
                         .iterations(ITERATIONS)
                         .seed(RND_SEED)
                         .optimizationAlgo(STOCHASTIC_GRADIENT_DESCENT)
                         .updater(new Nesterovs(0.9))
-                        .learningRate(0.16)
-                        .regularization(true).l2(0.45)
+                        .learningRate(0.145)
+                        .regularization(true).l2(0.06)
+//                        .dropOut(0.1)
                         .list()
                         .layer(0, new DenseLayer.Builder()
                                 .nIn(INPUT_COLS * INPUT_ROWS)
@@ -48,26 +49,25 @@ public class NNConfigFactory {
                         .build());
     }
 
-    // 84060 params
-    public NNConfig createTwoLayerConfig() {
+    public NNConfig createThreeLayerConfig() {
         return new NNConfig()
-                .withName(TWO_LAYER_MODEL)
+                .withName(TREE_LAYER_MODEL + 1)
                 .withConfiguration(new NeuralNetConfiguration.Builder()
                         .iterations(ITERATIONS)
                         .seed(RND_SEED)
                         .optimizationAlgo(STOCHASTIC_GRADIENT_DESCENT)
                         .updater(new Nesterovs(0.9))
-                        .learningRate(0.15)
+                        .learningRate(0.145)
                         .regularization(true).l2(0.6)
                         .list()
                         .layer(0, new DenseLayer.Builder()
                                 .nIn(INPUT_COLS * INPUT_ROWS)
-                                .nOut(64)
+                                .nOut(78)
                                 .activation(RELU)
                                 .weightInit(XAVIER)
                                 .build())
                         .layer(1, new DenseLayer.Builder()
-                                .nOut(32)
+                                .nOut(16)
                                 .activation(RELU)
                                 .weightInit(XAVIER)
                                 .build())
@@ -82,7 +82,6 @@ public class NNConfigFactory {
     }
 
     // TODO: Doesn't work
-    // 93256 params?
     public NNConfig createConvolutionConfig() {
         return new NNConfig()
                 .withName(CONVOLUTION_MODEL)
