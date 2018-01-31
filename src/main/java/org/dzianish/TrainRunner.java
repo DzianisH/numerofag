@@ -22,7 +22,7 @@ public class TrainRunner {
         DataSetIterator mnistTest = new MnistDataSetIterator(BATCH_SIZE, false, RND_SEED);
 
         LOG.info("Building model..");
-        NNConfig conf = new NNConfigFactory().createTwoLayerConfig();
+        NNConfig conf = new NNConfigFactory().createConvolutionConfig();
         NNModel model = new NNTrainerService().fitModel(conf, mnistTrain, mnistTest);
 
 //        LOG.info("Loading..");

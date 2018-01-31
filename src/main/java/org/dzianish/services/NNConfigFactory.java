@@ -1,7 +1,6 @@
 package org.dzianish.services;
 
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
-import org.deeplearning4j.nn.conf.inputs.InputType;
 import org.deeplearning4j.nn.conf.layers.ConvolutionLayer;
 import org.deeplearning4j.nn.conf.layers.DenseLayer;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
@@ -11,6 +10,7 @@ import org.dzianish.domain.NNConfig;
 import org.nd4j.linalg.learning.config.Nesterovs;
 
 import static org.deeplearning4j.nn.api.OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT;
+import static org.deeplearning4j.nn.conf.inputs.InputType.convolutionalFlat;
 import static org.deeplearning4j.nn.conf.layers.SubsamplingLayer.PoolingType.MAX;
 import static org.deeplearning4j.nn.weights.WeightInit.XAVIER;
 import static org.dzianish.consts.Constants.*;
@@ -89,35 +89,27 @@ public class NNConfigFactory {
                         .iterations(ITERATIONS)
                         .seed(RND_SEED)
                         .optimizationAlgo(STOCHASTIC_GRADIENT_DESCENT)
-                        .updater(new Nesterovs(0.86))
-                        .learningRate(0.05)
-                        .regularization(true).l2(0.9)
+                        .updater(new Nesterovs(0.9))
+                        .learningRate(0.145)
+                        .regularization(true).l2(0.06)
                         .list()
-                        .layer(0, new ConvolutionLayer.Builder(2, 2)
-                                .nIn(INPUT_COLS * INPUT_ROWS)
+                        .layer(0, new ConvolutionLayer.Builder(3, 3)
+                                .nIn(1)
                                 .nOut(8)
                                 .activation(RELU)
                                 .weightInit(XAVIER)
                                 .build())
-                        .layer(1, new SubsamplingLayer.Builder(3, 3)
+                        .layer(1, new SubsamplingLayer.Builder(2, 2)
                                 .stride(1, 1)
                                 .poolingType(MAX)
                                 .build())
-                        .layer(2, new DenseLayer.Builder()
-                                .nIn(100500)
-                                .nOut(50)
-                                .activation(RELU)
-                                .weightInit(XAVIER)
-                                .build())
-                        .layer(3, new OutputLayer.Builder()
-                                .nIn(100500)
+                        .layer(2, new OutputLayer.Builder()
                                 .nOut(CLASSES)
                                 .activation(SOFTMAX)
                                 .weightInit(XAVIER)
                                 .build())
                         .inputPreProcessor(0, new FeedForwardToCnnPreProcessor(INPUT_COLS, INPUT_ROWS, INPUT_DEPTH))
-//                        .setInputType(InputType.feedForward(INPUT_COLS * INPUT_ROWS))
-                        .setInputType(InputType.convolutionalFlat(28, 28, 1))
+                        .setInputType(convolutionalFlat(28, 28, 1))
                         .pretrain(false)
                         .backprop(true)
                         .build());
