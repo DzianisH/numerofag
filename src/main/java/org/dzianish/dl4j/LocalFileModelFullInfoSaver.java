@@ -12,6 +12,10 @@ import java.io.IOException;
 
 import static java.lang.String.format;
 
+/**
+ * Use EarlyStoppingListener
+ */
+@Deprecated
 public class LocalFileModelFullInfoSaver extends LocalFileModelSaver {
     private static final Logger LOG = LoggerFactory.getLogger(LocalFileModelFullInfoSaver.class);
 

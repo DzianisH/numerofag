@@ -9,5 +9,5 @@ public interface Constants {
     int ITERATIONS = 1;
     int CLASSES = 10;
     int RND_SEED = 132;
-    int BATCH_SIZE = 256;
+    int BATCH_SIZE = 512;
 }
