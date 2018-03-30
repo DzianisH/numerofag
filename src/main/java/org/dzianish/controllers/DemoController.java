@@ -32,7 +32,7 @@ public class DemoController {
         return new ModelAndView("index", model);
     }
 
-    @GetMapping("/demo/{modelName}")
+    @GetMapping("/demo/{modelName:.+}")
     public ModelAndView getDemoPage(@PathVariable String modelName, ModelMap model) {
         if (repository.isModelExists(modelName)) {
             model.put("modelName", modelName);
@@ -42,7 +42,7 @@ public class DemoController {
         return new ModelAndView("redirect:/index");
     }
 
-    @PostMapping(value = "/demo/{modelName}")
+    @PostMapping(value = "/demo/{modelName:.+}")
     @ResponseBody
     public NNPredictions getPrediction(@RequestBody double[][] features, @PathVariable String modelName) {
         if (LOG.isDebugEnabled()) {
