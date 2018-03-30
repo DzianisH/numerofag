@@ -8,6 +8,12 @@ abstract public class Utils {
         return new NDArray(array).reshape(1, array.length * array[0].length);
     }
 
+    public static INDArray toINDArray(double[] array){
+        double newArray[][] = new double[1][array.length];
+        System.arraycopy(array, 0, newArray[0], 0, array.length);
+        return new NDArray(newArray);
+    }
+
     public static String toString(double[][] features) {
         StringBuilder sb = new StringBuilder(features.length * features.length * 5 + features.length + 11);
 
