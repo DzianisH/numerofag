@@ -1,17 +1,19 @@
-package org.demo.mnist.services;
+package org.demo.mnist.services.impl;
 
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.demo.mnist.domain.NNModel;
 import org.demo.mnist.domain.NNPredictions;
+import org.demo.mnist.services.IExecutorService;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class NNExecutorService {
+public class NNExecutorService implements IExecutorService {
     private static final Logger LOG = LoggerFactory.getLogger(NNExecutorService.class);
 
+    @Override
     public NNPredictions getPrediction(NNModel nnModel, INDArray features) {
         MultiLayerNetwork model = nnModel.getModel();
         INDArray output = model.output(features);
@@ -26,6 +28,7 @@ public class NNExecutorService {
                 .withPredictionsCLass(getPredictionClass(output));
     }
 
+    @Override
     public int getPredictionClass(NNModel nnModel, INDArray features) {
         MultiLayerNetwork model = nnModel.getModel();
         INDArray output = model.output(features);

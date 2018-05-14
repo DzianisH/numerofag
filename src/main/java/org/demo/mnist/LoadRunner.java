@@ -1,13 +1,11 @@
 package org.demo.mnist;
 
 import org.demo.mnist.domain.NNModel;
-import org.demo.mnist.repositories.NNModelRepository;
-import org.demo.mnist.services.NNExecutorService;
+import org.demo.mnist.repositories.impl.NNModelRepository;
+import org.demo.mnist.services.impl.NNExecutorService;
 import org.demo.mnist.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static org.demo.mnist.utils.Utils.toINDArray;
 
 public class LoadRunner {
 	private static final Logger LOG = LoggerFactory.getLogger(LoadRunner.class);

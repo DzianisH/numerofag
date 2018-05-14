@@ -1,4 +1,4 @@
-package org.demo.mnist.services;
+package org.demo.mnist.services.impl;
 
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;

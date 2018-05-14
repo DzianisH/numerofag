@@ -1,4 +1,4 @@
-package org.demo.mnist.services;
+package org.demo.mnist.services.impl;
 
 import org.deeplearning4j.earlystopping.EarlyStoppingConfiguration;
 import org.deeplearning4j.earlystopping.EarlyStoppingResult;

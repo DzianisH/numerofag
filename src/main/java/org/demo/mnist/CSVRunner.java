@@ -2,8 +2,9 @@ package org.demo.mnist;
 
 import com.google.common.io.Files;
 import org.demo.mnist.domain.NNModel;
-import org.demo.mnist.repositories.NNModelRepository;
-import org.demo.mnist.services.NNExecutorService;
+import org.demo.mnist.repositories.impl.NNModelRepository;
+import org.demo.mnist.services.IExecutorService;
+import org.demo.mnist.services.impl.NNExecutorService;
 import org.demo.mnist.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +25,9 @@ public class CSVRunner {
 
 		LOG.info("Loading data from {}", args[0]);
 		File file = new File(args[0]);
-		NNExecutorService executor = new NNExecutorService();
+		IExecutorService executor = new NNExecutorService();
 
-		try(BufferedWriter writer = new BufferedWriter(new FileWriter(new File("result.csv")))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File("result.csv")))) {
 			writer.write("ImageId,Label\r\n");
 
 			LOG.info("Executing model");
@@ -40,8 +41,8 @@ public class CSVRunner {
 					.toArray();
 
 			LOG.info("Writing predictions");
-			for (int i = 0; i < predictions.length; ++i){
-				writer.write(Integer.toString(i+1));
+			for (int i = 0; i < predictions.length; ++i) {
+				writer.write(Integer.toString(i + 1));
 				writer.write(",");
 				writer.write(Integer.toString(predictions[i]));
 				writer.write("\r\n");
@@ -49,7 +50,7 @@ public class CSVRunner {
 		}
 	}
 
-	private static double[] parseToDouble(String[] arr){
+	private static double[] parseToDouble(String[] arr) {
 		return Stream.of(arr)
 				.mapToDouble(Double::parseDouble)
 				.toArray();
