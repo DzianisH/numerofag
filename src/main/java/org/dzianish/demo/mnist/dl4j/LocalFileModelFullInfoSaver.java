@@ -1,4 +1,4 @@
-package org.demo.mnist.dl4j;
+package org.dzianish.demo.mnist.dl4j;
 
 import org.apache.commons.io.FilenameUtils;
 import org.deeplearning4j.earlystopping.saver.LocalFileModelSaver;

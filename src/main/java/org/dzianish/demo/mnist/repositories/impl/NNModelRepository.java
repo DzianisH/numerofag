@@ -1,10 +1,10 @@
-package org.demo.mnist.repositories.impl;
+package org.dzianish.demo.mnist.repositories.impl;
 
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;
-import org.demo.mnist.domain.NNModel;
-import org.demo.mnist.services.impl.NNConfigFactory;
-import org.demo.mnist.repositories.IModelRepository;
+import org.dzianish.demo.mnist.domain.NNModel;
+import org.dzianish.demo.mnist.services.impl.NNConfigFactory;
+import org.dzianish.demo.mnist.repositories.IModelRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;

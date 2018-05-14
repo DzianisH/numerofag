@@ -1,4 +1,4 @@
-package org.demo.mnist.services.impl;
+package org.dzianish.demo.mnist.services.impl;
 
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
@@ -10,8 +10,8 @@ import org.deeplearning4j.nn.conf.layers.SubsamplingLayer;
 import org.deeplearning4j.nn.conf.layers.SubsamplingLayer.PoolingType;
 import org.deeplearning4j.nn.conf.preprocessor.FeedForwardToCnnPreProcessor;
 import org.deeplearning4j.nn.weights.WeightInit;
-import org.demo.mnist.consts.Constants;
-import org.demo.mnist.domain.NNConfig;
+import org.dzianish.demo.mnist.consts.Constants;
+import org.dzianish.demo.mnist.domain.NNConfig;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.learning.config.Nesterovs;
 

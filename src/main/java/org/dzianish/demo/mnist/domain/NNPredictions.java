@@ -1,4 +1,4 @@
-package org.demo.mnist.domain;
+package org.dzianish.demo.mnist.domain;
 
 public class NNPredictions {
     private double[] estimates;

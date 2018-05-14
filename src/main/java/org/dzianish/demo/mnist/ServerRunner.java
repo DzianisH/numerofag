@@ -1,4 +1,4 @@
-package org.demo.mnist;
+package org.dzianish.demo.mnist;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

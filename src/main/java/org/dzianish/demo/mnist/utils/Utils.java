@@ -1,4 +1,4 @@
-package org.demo.mnist.utils;
+package org.dzianish.demo.mnist.utils;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.cpu.nativecpu.NDArray;

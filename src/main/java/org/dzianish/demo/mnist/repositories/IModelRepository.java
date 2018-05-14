@@ -1,6 +1,6 @@
-package org.demo.mnist.repositories;
+package org.dzianish.demo.mnist.repositories;
 
-import org.demo.mnist.domain.NNModel;
+import org.dzianish.demo.mnist.domain.NNModel;
 
 import java.util.List;
 

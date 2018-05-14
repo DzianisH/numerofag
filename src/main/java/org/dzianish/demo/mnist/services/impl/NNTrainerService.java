@@ -1,4 +1,4 @@
-package org.demo.mnist.services.impl;
+package org.dzianish.demo.mnist.services.impl;
 
 import org.deeplearning4j.earlystopping.EarlyStoppingConfiguration;
 import org.deeplearning4j.earlystopping.EarlyStoppingResult;
@@ -7,11 +7,11 @@ import org.deeplearning4j.earlystopping.termination.ScoreImprovementEpochTermina
 import org.deeplearning4j.earlystopping.trainer.EarlyStoppingTrainer;
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
-import org.demo.mnist.consts.Constants;
-import org.demo.mnist.dl4j.LocalFileModelFullInfoSaver;
-import org.demo.mnist.dl4j.GenericCalculator;
-import org.demo.mnist.domain.NNConfig;
-import org.demo.mnist.domain.NNModel;
+import org.dzianish.demo.mnist.consts.Constants;
+import org.dzianish.demo.mnist.dl4j.LocalFileModelFullInfoSaver;
+import org.dzianish.demo.mnist.dl4j.GenericCalculator;
+import org.dzianish.demo.mnist.domain.NNConfig;
+import org.dzianish.demo.mnist.domain.NNModel;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;

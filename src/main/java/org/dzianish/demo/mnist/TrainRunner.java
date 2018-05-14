@@ -1,11 +1,11 @@
-package org.demo.mnist;
+package org.dzianish.demo.mnist;
 
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
-import org.demo.mnist.consts.Constants;
-import org.demo.mnist.domain.NNConfig;
-import org.demo.mnist.domain.NNModel;
-import org.demo.mnist.services.impl.NNConfigFactory;
-import org.demo.mnist.services.impl.NNTrainerService;
+import org.dzianish.demo.mnist.consts.Constants;
+import org.dzianish.demo.mnist.domain.NNConfig;
+import org.dzianish.demo.mnist.domain.NNModel;
+import org.dzianish.demo.mnist.services.impl.NNConfigFactory;
+import org.dzianish.demo.mnist.services.impl.NNTrainerService;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

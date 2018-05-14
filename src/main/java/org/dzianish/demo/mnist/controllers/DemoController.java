@@ -1,10 +1,10 @@
-package org.demo.mnist.controllers;
+package org.dzianish.demo.mnist.controllers;
 
-import org.demo.mnist.domain.NNModel;
-import org.demo.mnist.domain.NNPredictions;
-import org.demo.mnist.utils.Utils;
-import org.demo.mnist.repositories.IModelRepository;
-import org.demo.mnist.services.IExecutorService;
+import org.dzianish.demo.mnist.domain.NNModel;
+import org.dzianish.demo.mnist.domain.NNPredictions;
+import org.dzianish.demo.mnist.utils.Utils;
+import org.dzianish.demo.mnist.repositories.IModelRepository;
+import org.dzianish.demo.mnist.services.IExecutorService;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
-package org.demo.mnist.services;
+package org.dzianish.demo.mnist.services;
 
-import org.demo.mnist.domain.NNModel;
-import org.demo.mnist.domain.NNPredictions;
+import org.dzianish.demo.mnist.domain.NNModel;
+import org.dzianish.demo.mnist.domain.NNPredictions;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 public interface IExecutorService {
