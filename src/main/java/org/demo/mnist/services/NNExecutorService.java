@@ -1,8 +1,8 @@
-package org.dzianish.services;
+package org.demo.mnist.services;
 
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
-import org.dzianish.domain.NNModel;
-import org.dzianish.domain.NNPredictions;
+import org.demo.mnist.domain.NNModel;
+import org.demo.mnist.domain.NNPredictions;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

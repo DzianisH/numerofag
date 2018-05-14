@@ -1,8 +1,9 @@
-package org.dzianish.dl4j;
+package org.demo.mnist.dl4j;
 
 import org.deeplearning4j.earlystopping.scorecalc.ScoreCalculator;
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
+import org.demo.mnist.consts.Constants;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
@@ -10,8 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.function.ToDoubleFunction;
-
-import static org.dzianish.consts.Constants.CLASSES;
 
 public class GenericCalculator implements ScoreCalculator<MultiLayerNetwork> {
 	private static final Logger LOG = LoggerFactory.getLogger(GenericCalculator.class);
@@ -28,7 +27,7 @@ public class GenericCalculator implements ScoreCalculator<MultiLayerNetwork> {
 	public double calculateScore(MultiLayerNetwork network) {
 		dsIterator.reset();
 
-		Evaluation eval = new Evaluation(CLASSES); //create an evaluation object with 10 possible classes
+		Evaluation eval = new Evaluation(Constants.CLASSES); //create an evaluation object with 10 possible classes
 		while (dsIterator.hasNext()) {
 			DataSet next = dsIterator.next();
 			INDArray output = network.output(next.getFeatureMatrix()); //get the networks prediction

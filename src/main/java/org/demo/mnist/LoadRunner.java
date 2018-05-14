@@ -1,12 +1,13 @@
-package org.dzianish;
+package org.demo.mnist;
 
-import org.dzianish.domain.NNModel;
-import org.dzianish.repositories.NNModelRepository;
-import org.dzianish.services.NNExecutorService;
+import org.demo.mnist.domain.NNModel;
+import org.demo.mnist.repositories.NNModelRepository;
+import org.demo.mnist.services.NNExecutorService;
+import org.demo.mnist.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.dzianish.utils.Utils.toINDArray;
+import static org.demo.mnist.utils.Utils.toINDArray;
 
 public class LoadRunner {
 	private static final Logger LOG = LoggerFactory.getLogger(LoadRunner.class);
@@ -17,16 +18,16 @@ public class LoadRunner {
 
 		LOG.info("Evaluating model..");
 
-		int prediction = new NNExecutorService().getPredictionClass(model, toINDArray(EIGHT));
+		int prediction = new NNExecutorService().getPredictionClass(model, Utils.toINDArray(EIGHT));
 		LOG.info(prediction + " should be EIGHT");
 
-		prediction = new NNExecutorService().getPredictionClass(model, toINDArray(NINE));
+		prediction = new NNExecutorService().getPredictionClass(model, Utils.toINDArray(NINE));
 		LOG.info(prediction + " should be NINE");
 
-		prediction = new NNExecutorService().getPredictionClass(model, toINDArray(THREE));
+		prediction = new NNExecutorService().getPredictionClass(model, Utils.toINDArray(THREE));
 		LOG.info(prediction + " should be THREE");
 
-		prediction = new NNExecutorService().getPredictionClass(model, toINDArray(ONE));
+		prediction = new NNExecutorService().getPredictionClass(model, Utils.toINDArray(ONE));
 		LOG.info(prediction + " should be ONE");
 	}
 

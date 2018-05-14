@@ -1,10 +1,10 @@
-package org.dzianish.controllers;
+package org.demo.mnist.controllers;
 
-import org.dzianish.services.NNExecutorService;
-import org.dzianish.domain.NNModel;
-import org.dzianish.repositories.NNModelRepository;
-import org.dzianish.domain.NNPredictions;
-import org.dzianish.utils.Utils;
+import org.demo.mnist.domain.NNModel;
+import org.demo.mnist.domain.NNPredictions;
+import org.demo.mnist.repositories.NNModelRepository;
+import org.demo.mnist.utils.Utils;
+import org.demo.mnist.services.NNExecutorService;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import static org.dzianish.utils.Utils.toINDArray;
+import static org.demo.mnist.utils.Utils.toINDArray;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Controller
@@ -50,7 +50,7 @@ public class DemoController {
         }
 
         NNModel model = repository.load(modelName);
-        INDArray indFeatures = toINDArray(features);
+        INDArray indFeatures = Utils.toINDArray(features);
 
         return executor.getPrediction(model, indFeatures);
     }

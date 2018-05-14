@@ -1,24 +1,22 @@
-package org.dzianish.services;
+package org.demo.mnist.services;
 
 import org.deeplearning4j.earlystopping.EarlyStoppingConfiguration;
 import org.deeplearning4j.earlystopping.EarlyStoppingResult;
 import org.deeplearning4j.earlystopping.termination.InvalidScoreIterationTerminationCondition;
-import org.deeplearning4j.earlystopping.termination.MaxEpochsTerminationCondition;
 import org.deeplearning4j.earlystopping.termination.ScoreImprovementEpochTerminationCondition;
 import org.deeplearning4j.earlystopping.trainer.EarlyStoppingTrainer;
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
-import org.dzianish.dl4j.GenericCalculator;
-import org.dzianish.dl4j.LocalFileModelFullInfoSaver;
-import org.dzianish.domain.NNConfig;
-import org.dzianish.domain.NNModel;
+import org.demo.mnist.consts.Constants;
+import org.demo.mnist.dl4j.LocalFileModelFullInfoSaver;
+import org.demo.mnist.dl4j.GenericCalculator;
+import org.demo.mnist.domain.NNConfig;
+import org.demo.mnist.domain.NNModel;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static org.dzianish.consts.Constants.*;
 
 //@Service
 public class NNTrainerService {
@@ -41,7 +39,7 @@ public class NNTrainerService {
         EarlyStoppingConfiguration<MultiLayerNetwork> esConf = new EarlyStoppingConfiguration.Builder<MultiLayerNetwork>()
                 .epochTerminationConditions(
 //                        new MaxEpochsTerminationCondition(MAX_EPOCHS),
-                        new ScoreImprovementEpochTerminationCondition(MAX_EPOCHS_WO_IMPROVEMENT))
+                        new ScoreImprovementEpochTerminationCondition(Constants.MAX_EPOCHS_WO_IMPROVEMENT))
                 .iterationTerminationConditions(new InvalidScoreIterationTerminationCondition())
                 .saveLastModel(true)
                 .scoreCalculator(new GenericCalculator(testDS, Evaluation::accuracy))
@@ -70,7 +68,7 @@ public class NNTrainerService {
         LOG.info("Evaluating model " + nnModel.getName());
         MultiLayerNetwork model = nnModel.getModel();
         ds.reset();
-        Evaluation eval = new Evaluation(CLASSES); //create an evaluation object with 10 possible classes
+        Evaluation eval = new Evaluation(Constants.CLASSES); //create an evaluation object with 10 possible classes
         while (ds.hasNext()) {
             DataSet next = ds.next();
             INDArray output = model.output(next.getFeatureMatrix()); //get the networks prediction

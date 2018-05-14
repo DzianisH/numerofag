@@ -1,4 +1,4 @@
-package org.dzianish.consts;
+package org.demo.mnist.consts;
 
 public interface Constants {
     int INPUT_ROWS = 28;

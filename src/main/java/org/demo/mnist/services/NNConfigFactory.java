@@ -1,4 +1,4 @@
-package org.dzianish.services;
+package org.demo.mnist.services;
 
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
@@ -10,20 +10,12 @@ import org.deeplearning4j.nn.conf.layers.SubsamplingLayer;
 import org.deeplearning4j.nn.conf.layers.SubsamplingLayer.PoolingType;
 import org.deeplearning4j.nn.conf.preprocessor.FeedForwardToCnnPreProcessor;
 import org.deeplearning4j.nn.weights.WeightInit;
-import org.dzianish.domain.NNConfig;
+import org.demo.mnist.consts.Constants;
+import org.demo.mnist.domain.NNConfig;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.learning.config.Nesterovs;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.deeplearning4j.nn.conf.inputs.InputType.convolutionalFlat;
-import static org.dzianish.consts.Constants.CLASSES;
-import static org.dzianish.consts.Constants.INPUT_COLS;
-import static org.dzianish.consts.Constants.INPUT_DEPTH;
-import static org.dzianish.consts.Constants.INPUT_ROWS;
-import static org.dzianish.consts.Constants.ITERATIONS;
-import static org.dzianish.consts.Constants.RND_SEED;
 import static org.nd4j.linalg.lossfunctions.LossFunctions.LossFunction.MCXENT;
 
 public class NNConfigFactory {
@@ -32,8 +24,8 @@ public class NNConfigFactory {
 		return new NNConfig()
 				.withName("D1024-O")
 				.withConfiguration(new NeuralNetConfiguration.Builder()
-						.iterations(ITERATIONS)
-						.seed(RND_SEED)
+						.iterations(Constants.ITERATIONS)
+						.seed(Constants.RND_SEED)
 						.optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
 						.updater(new Nesterovs(0.9))
 						.learningRate(0.13)
@@ -41,13 +33,13 @@ public class NNConfigFactory {
 //                        .dropOut(0.1)
 						.list()
 						.layer(0, new DenseLayer.Builder()
-								.nIn(INPUT_COLS * INPUT_ROWS)
+								.nIn(Constants.INPUT_COLS * Constants.INPUT_ROWS)
 								.nOut(1024)
 								.activation(Activation.RELU)
 								.weightInit(WeightInit.XAVIER_UNIFORM)
 								.build())
 						.layer(1, new OutputLayer.Builder()
-								.nOut(CLASSES)
+								.nOut(Constants.CLASSES)
 								.activation(Activation.SOFTMAX)
 								.weightInit(WeightInit.XAVIER)
 								.lossFunction(MCXENT)
@@ -61,15 +53,15 @@ public class NNConfigFactory {
 		return new NNConfig()
 				.withName("D1024-D256-O")
 				.withConfiguration(new NeuralNetConfiguration.Builder()
-						.iterations(ITERATIONS)
-						.seed(RND_SEED)
+						.iterations(Constants.ITERATIONS)
+						.seed(Constants.RND_SEED)
 						.optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
 						.updater(new Nesterovs(0.9))
 						.learningRate(0.145)
 						.regularization(true).l2(9e-2)
 						.list()
 						.layer(0, new DenseLayer.Builder()
-								.nIn(INPUT_COLS * INPUT_ROWS)
+								.nIn(Constants.INPUT_COLS * Constants.INPUT_ROWS)
 								.nOut(1024)
 								.activation(Activation.RELU)
 								.weightInit(WeightInit.XAVIER_UNIFORM)
@@ -80,7 +72,7 @@ public class NNConfigFactory {
 								.weightInit(WeightInit.XAVIER_UNIFORM)
 								.build())
 						.layer(2, new OutputLayer.Builder()
-								.nOut(CLASSES)
+								.nOut(Constants.CLASSES)
 								.activation(Activation.SOFTMAX)
 								.weightInit(WeightInit.XAVIER)
 								.build())
@@ -93,8 +85,8 @@ public class NNConfigFactory {
 		return new NNConfig()
 				.withName("C16S-C32S-D128-O=L2(1e-2)lrp")
 				.withConfiguration(new NeuralNetConfiguration.Builder()
-						.iterations(ITERATIONS)
-						.seed(RND_SEED)
+						.iterations(Constants.ITERATIONS)
+						.seed(Constants.RND_SEED)
 						.optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
 						.updater(new Nesterovs(0.9))
 						.learningRate(0.07)
@@ -131,12 +123,12 @@ public class NNConfigFactory {
 //								.nIn(1)
 								.build())
 						.layer(5, new OutputLayer.Builder()
-								.nOut(CLASSES)
+								.nOut(Constants.CLASSES)
 								.activation(Activation.SOFTMAX)
 								.weightInit(WeightInit.XAVIER)
 								.build())
-						.inputPreProcessor(0, new FeedForwardToCnnPreProcessor(INPUT_COLS, INPUT_ROWS, INPUT_DEPTH))
-						.setInputType(InputType.convolutionalFlat(INPUT_COLS, INPUT_ROWS, INPUT_DEPTH))
+						.inputPreProcessor(0, new FeedForwardToCnnPreProcessor(Constants.INPUT_COLS, Constants.INPUT_ROWS, Constants.INPUT_DEPTH))
+						.setInputType(InputType.convolutionalFlat(Constants.INPUT_COLS, Constants.INPUT_ROWS, Constants.INPUT_DEPTH))
 						.pretrain(false)
 						.backprop(true)
 						.build());
@@ -146,8 +138,8 @@ public class NNConfigFactory {
 		return new NNConfig()
 				.withName("C12-C12S-D100-D32-O-1")
 				.withConfiguration(new NeuralNetConfiguration.Builder()
-						.iterations(ITERATIONS)
-						.seed(RND_SEED)
+						.iterations(Constants.ITERATIONS)
+						.seed(Constants.RND_SEED)
 						.optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
 						.updater(new Nesterovs(0.9))
 						.learningRate(0.17)//
@@ -184,12 +176,12 @@ public class NNConfigFactory {
 								.nOut(20)
 								.build())
 						.layer(5, new OutputLayer.Builder()
-								.nOut(CLASSES)
+								.nOut(Constants.CLASSES)
 								.activation(Activation.SOFTMAX)
 								.weightInit(WeightInit.XAVIER)
 								.build())
-						.inputPreProcessor(0, new FeedForwardToCnnPreProcessor(INPUT_COLS, INPUT_ROWS, INPUT_DEPTH))
-						.setInputType(convolutionalFlat(INPUT_COLS, INPUT_ROWS, INPUT_DEPTH))
+						.inputPreProcessor(0, new FeedForwardToCnnPreProcessor(Constants.INPUT_COLS, Constants.INPUT_ROWS, Constants.INPUT_DEPTH))
+						.setInputType(convolutionalFlat(Constants.INPUT_COLS, Constants.INPUT_ROWS, Constants.INPUT_DEPTH))
 						.pretrain(false)
 						.backprop(true)
 						.build());

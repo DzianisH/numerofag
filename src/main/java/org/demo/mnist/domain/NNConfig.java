@@ -1,4 +1,4 @@
-package org.dzianish.domain;
+package org.demo.mnist.domain;
 
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 

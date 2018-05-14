@@ -1,10 +1,10 @@
-package org.dzianish;
+package org.demo.mnist;
 
 import com.google.common.io.Files;
-import org.dzianish.domain.NNModel;
-import org.dzianish.repositories.NNModelRepository;
-import org.dzianish.services.NNExecutorService;
-import org.dzianish.utils.Utils;
+import org.demo.mnist.domain.NNModel;
+import org.demo.mnist.repositories.NNModelRepository;
+import org.demo.mnist.services.NNExecutorService;
+import org.demo.mnist.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
