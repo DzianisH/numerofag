@@ -35,7 +35,7 @@ public class NNExecutorService {
 
     private int getPredictionClass(INDArray output) {
         INDArray prediction = output.argMax(1);
-        if (LOG.isInfoEnabled()) {
+        if (LOG.isDebugEnabled()) {
             logOutput(output);
         }
 
@@ -43,11 +43,11 @@ public class NNExecutorService {
     }
 
     private void logOutput(INDArray output) {
-        StringBuffer sb = new StringBuffer(50);
+        StringBuilder sb = new StringBuilder(50);
         for (int i = 0; i < output.length(); ++i) {
             double val = output.getDouble(i);
             sb.append(String.format("%.2f ", val));
         }
-        LOG.info(sb.toString());
+        LOG.debug(sb.toString());
     }
 }

@@ -13,7 +13,7 @@ public class LoadRunner {
 
 	public static void main(String[] args) {
 		LOG.info("Loading model..");
-		NNModel model = new NNModelRepository().load("three-layer-model");
+		NNModel model = new NNModelRepository().load("C16S-C32S-D128-O=L2(1e-2)lr(0.07)");
 
 		LOG.info("Evaluating model..");
 
@@ -28,8 +28,6 @@ public class LoadRunner {
 
 		prediction = new NNExecutorService().getPredictionClass(model, toINDArray(ONE));
 		LOG.info(prediction + " should be ONE");
-
-
 	}
 
 	private static final double[][] ONE = {{0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00},
