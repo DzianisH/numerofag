@@ -29,4 +29,6 @@ hs_err_pid*
 
 .gradle
 build/*
-models
+models/*
+
+!models/demo-model
