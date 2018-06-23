@@ -6,11 +6,13 @@ var main = {
     answer: null,
     previewCtx: null,
     probabilities: null,
+    tap: false,
 
     init: function (sizeX, sizeY, scale, penSize) {
         main.answer = document.getElementById("answer");
         main.previewCtx = document.getElementById("previewCanvas").getContext("2d");
-        main.ctx = document.getElementById("inputCanvas").getContext("2d");
+        var canvas = document.getElementById("inputCanvas");
+        main.ctx = canvas.getContext("2d");
         main.canvSize = {x: sizeX * scale, y: sizeY * scale};
         main.scale = scale;
         if (!penSize) penSize = scale;
@@ -20,6 +22,43 @@ var main = {
         for (var i = 0; i < main.probabilities.length; ++i) {
             main.probabilities[i] = document.getElementById("probability-for-" + i);
         }
+
+        main.initTouchHandlers(canvas);
+    },
+
+    initTouchHandlers: function(canvas) {
+        canvas.addEventListener("touchstart", function (e) {
+            console.log('asasas')
+            mousePos = main.getTouchPos(canvas, e);
+            var touch = e.touches[0];
+            var mouseEvent = new MouseEvent("mousedown", {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }, false);
+        canvas.addEventListener("touchend", function (e) {
+            console.log('asasas')
+            var mouseEvent = new MouseEvent("mouseup", {});
+            canvas.dispatchEvent(mouseEvent);
+        }, false);
+        canvas.addEventListener("touchmove", function (e) {
+            console.log('asasa11111s')
+            var touch = e.touches[0];
+            var mouseEvent = new MouseEvent("mousemove", {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }, false);
+    },
+
+    getTouchPos: function (canvasDom, touchEvent) {
+        var rect = canvasDom.getBoundingClientRect();
+        return {
+            x: touchEvent.touches[0].clientX - rect.left,
+            y: touchEvent.touches[0].clientY - rect.top
+        };
     },
 
     onMouseMove: function (event) {

@@ -29,6 +29,11 @@ html body {
     padding: 0 5em;
 }
 
+.fst-demo-box {
+    padding: 0!important;
+    width: 280px!important;
+}
+
 #inputCanvas {
     position: absolute;
     left: 3em;
@@ -36,6 +41,7 @@ html body {
 
 .demo-box > canvas {
     border: 1px solid #000000;
+    width: 280px;
     background: #fcfcfe;
 }
 
