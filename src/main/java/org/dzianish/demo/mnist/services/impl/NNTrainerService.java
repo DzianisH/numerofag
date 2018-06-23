@@ -3,6 +3,7 @@ package org.dzianish.demo.mnist.services.impl;
 import org.deeplearning4j.earlystopping.EarlyStoppingConfiguration;
 import org.deeplearning4j.earlystopping.EarlyStoppingResult;
 import org.deeplearning4j.earlystopping.termination.InvalidScoreIterationTerminationCondition;
+import org.deeplearning4j.earlystopping.termination.MaxEpochsTerminationCondition;
 import org.deeplearning4j.earlystopping.termination.ScoreImprovementEpochTerminationCondition;
 import org.deeplearning4j.earlystopping.trainer.EarlyStoppingTrainer;
 import org.deeplearning4j.eval.Evaluation;
@@ -17,6 +18,8 @@ import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.dzianish.demo.mnist.consts.Constants.MAX_EPOCHS;
 
 //@Service
 public class NNTrainerService {
@@ -38,7 +41,7 @@ public class NNTrainerService {
 
         EarlyStoppingConfiguration<MultiLayerNetwork> esConf = new EarlyStoppingConfiguration.Builder<MultiLayerNetwork>()
                 .epochTerminationConditions(
-//                        new MaxEpochsTerminationCondition(MAX_EPOCHS),
+                        new MaxEpochsTerminationCondition(MAX_EPOCHS),
                         new ScoreImprovementEpochTerminationCondition(Constants.MAX_EPOCHS_WO_IMPROVEMENT))
                 .iterationTerminationConditions(new InvalidScoreIterationTerminationCondition())
                 .saveLastModel(true)

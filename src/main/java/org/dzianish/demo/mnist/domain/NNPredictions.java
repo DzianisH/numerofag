@@ -29,4 +29,8 @@ public class NNPredictions {
     public void setEstimates(double[] estimates) {
         this.estimates = estimates;
     }
+
+    public String toString(){
+        return "Predicted class: " + predictionClass;
+    }
 }

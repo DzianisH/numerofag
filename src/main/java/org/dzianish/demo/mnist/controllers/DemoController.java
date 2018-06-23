@@ -55,6 +55,8 @@ public class DemoController {
 		NNModel model = repository.load(modelName);
 		INDArray indFeatures = Utils.toINDArray(features);
 
-		return executor.getPrediction(model, indFeatures);
+		NNPredictions predictions = executor.getPrediction(model, indFeatures);
+		LOG.info(predictions.toString());
+		return predictions;
 	}
 }
