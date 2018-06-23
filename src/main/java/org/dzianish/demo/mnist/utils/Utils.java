@@ -1,17 +1,17 @@
 package org.dzianish.demo.mnist.utils;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.cpu.nativecpu.NDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 abstract public class Utils {
     public static INDArray toINDArray(double[][] array) {
-        return new NDArray(array).reshape(1, array.length * array[0].length);
+        return Nd4j.create(array).reshape(1, array.length * array[0].length);
     }
 
     public static INDArray toINDArray(double[] array){
         double newArray[][] = new double[1][array.length];
         System.arraycopy(array, 0, newArray[0], 0, array.length);
-        return new NDArray(newArray);
+        return Nd4j.create(newArray);
     }
 
     public static String toString(double[][] features) {

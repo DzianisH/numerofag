@@ -33,7 +33,6 @@ var main = {
     },
 
     onMouseDrag: function (position) {
-        // var offset = main.penSize / 2;
         main.ctx.fillRect(position.x, position.y, main.penSize, main.penSize);
     },
 

@@ -26,6 +26,12 @@ html body {
 
 .demo-box {
     margin: 0 2em;
+    padding: 0 5em;
+}
+
+#inputCanvas {
+    position: absolute;
+    left: 3em;
 }
 
 .demo-box > canvas {
