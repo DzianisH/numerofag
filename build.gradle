@@ -32,6 +32,7 @@ dependencies {
 //	compile 'org.nd4j:nd4j-cuda-9.2-platform:1.0.0-beta'
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '5.1'
 	compileOnly 'org.projectlombok:lombok'
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
